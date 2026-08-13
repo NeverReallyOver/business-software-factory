@@ -9,6 +9,7 @@ import { Field } from "@/components/shared/field";
 import { FormStatus } from "@/components/shared/form-status";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { updateProfile } from "../actions";
 import { profileSchema, type ProfileInput } from "../schemas";
 
@@ -20,7 +21,7 @@ export function ProfileForm({
   defaultName: string;
 }) {
   const router = useRouter();
-  const [status, setStatus] = useState<{ error?: string; success?: string }>({});
+  const [error, setError] = useState<string>();
   const {
     register,
     handleSubmit,
@@ -31,15 +32,19 @@ export function ProfileForm({
   });
 
   async function onSubmit(values: ProfileInput) {
-    setStatus({});
+    setError(undefined);
     const result = await updateProfile(values);
-    setStatus(result);
-    if (result.success) router.refresh();
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
+    toast.success("Profile updated");
+    router.refresh();
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
-      <FormStatus error={status.error} success={status.success} />
+      <FormStatus error={error} />
 
       <Field label="Email" htmlFor="email">
         <Input id="email" type="email" value={email} disabled />

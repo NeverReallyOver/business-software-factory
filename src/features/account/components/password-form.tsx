@@ -8,11 +8,12 @@ import { Field } from "@/components/shared/field";
 import { FormStatus } from "@/components/shared/form-status";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { changePassword } from "../actions";
 import { changePasswordSchema, type ChangePasswordInput } from "../schemas";
 
 export function PasswordForm() {
-  const [status, setStatus] = useState<{ error?: string; success?: string }>({});
+  const [error, setError] = useState<string>();
   const {
     register,
     handleSubmit,
@@ -21,15 +22,19 @@ export function PasswordForm() {
   } = useForm<ChangePasswordInput>({ resolver: zodResolver(changePasswordSchema) });
 
   async function onSubmit(values: ChangePasswordInput) {
-    setStatus({});
+    setError(undefined);
     const result = await changePassword(values);
-    setStatus(result);
-    if (result.success) reset();
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
+    toast.success("Password changed");
+    reset();
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
-      <FormStatus error={status.error} success={status.success} />
+      <FormStatus error={error} />
 
       <Field
         label="Current password"

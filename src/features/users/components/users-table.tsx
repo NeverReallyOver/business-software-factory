@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { DataTable, type Column } from "@/components/shared/data-table";
+import { toast } from "@/components/ui/toast";
 import { USER_ROLES, roleLabel } from "@/config/roles";
 import { cn } from "@/lib/utils";
 import type { Profile, UserRole } from "@/types/database";
@@ -52,6 +53,7 @@ export function UsersTable({
         return;
       }
       setError(undefined);
+      toast.success(`Role updated to ${roleLabel(change.newRole)}`);
       router.refresh();
     });
   }
