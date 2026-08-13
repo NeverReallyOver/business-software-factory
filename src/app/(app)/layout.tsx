@@ -37,12 +37,15 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           </span>
 
           <div className="ml-auto flex items-center gap-3">
-            <div className="hidden text-right sm:block">
-              <p className="text-sm leading-tight">{profile?.email}</p>
-              <p className="text-xs capitalize leading-tight text-muted-foreground">
+            <Link
+              href="/account"
+              className="hidden rounded-md px-2 py-1 text-right hover:bg-muted sm:block"
+            >
+              <span className="block text-sm leading-tight">{profile?.email}</span>
+              <span className="block text-xs capitalize leading-tight text-muted-foreground">
                 {profile?.role}
-              </p>
-            </div>
+              </span>
+            </Link>
             <form action={signOut}>
               <Button type="submit" variant="outline" size="sm">
                 Sign out

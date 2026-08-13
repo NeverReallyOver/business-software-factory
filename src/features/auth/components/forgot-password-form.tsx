@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { requestPasswordReset } from "@/features/auth/actions";
 import { forgotPasswordSchema, type ForgotPasswordInput } from "@/features/auth/schemas";
-import { Field } from "./field";
-import { FormStatus } from "./form-status";
+import { Field } from "@/components/shared/field";
+import { FormStatus } from "@/components/shared/form-status";
 
 export function ForgotPasswordForm() {
   const [formError, setFormError] = useState<string>();

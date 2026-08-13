@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signIn } from "@/features/auth/actions";
 import { loginSchema, type LoginInput } from "@/features/auth/schemas";
-import { Field } from "./field";
-import { FormStatus } from "./form-status";
+import { Field } from "@/components/shared/field";
+import { FormStatus } from "@/components/shared/form-status";
 
 export function LoginForm({ next }: { next?: string }) {
   const [formError, setFormError] = useState<string>();
