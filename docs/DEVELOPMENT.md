@@ -19,7 +19,15 @@ npm run dev
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=       # server-only, never exposed to client
+NEXT_PUBLIC_SITE_URL=            # public URL for auth email redirects (prod)
 ```
+
+## Database migrations
+
+SQL migrations live in `supabase/migrations/`. Apply them with the Supabase CLI
+(`supabase db push`, or `supabase db reset` locally). `0001_profiles.sql`
+provides the reusable `profiles` table, `user_role` enum, and RLS used by the
+`auth` feature.
 
 ## Scripts (expected)
 
