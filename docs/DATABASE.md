@@ -41,5 +41,13 @@ to hide data — authorization is enforced in the database. See `SECURITY.md`.
 
 ## Reusable (master starter) tables
 
-Only genuinely reusable tables live in the starter (e.g. profiles/users, roles).
-Customer-specific tables live in the customer project.
+Only genuinely reusable tables live in the starter. Customer-specific tables
+live in the customer project.
+
+- `profiles` (`supabase/migrations/0001_profiles.sql`) — one row per
+  `auth.users` row, holding `email`, `full_name`, and `role`
+  (`user_role` enum: owner, admin, staff, employee, customer). A trigger creates
+  the profile on signup and assigns the first user `owner`. RLS lets users read
+  and update their own profile (not their role). Owners/admins manage other
+  users' roles, but no one changes their own role via the privileged policy and
+  only an owner may target or assign the `owner` role.
