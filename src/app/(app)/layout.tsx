@@ -2,12 +2,12 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { appConfig } from "@/config/app";
 import { navItemsForRole } from "@/config/navigation";
 import { signOut } from "@/features/auth/actions";
 import { requireUser, getProfile } from "@/features/auth/server";
 import { MobileNav } from "@/features/dashboard/components/mobile-nav";
 import { SidebarNav } from "@/features/dashboard/components/sidebar-nav";
+import { getAppSettings } from "@/features/settings/queries";
 
 /**
  * Authenticated application shell: responsive sidebar + header. Enforces auth
@@ -17,6 +17,8 @@ import { SidebarNav } from "@/features/dashboard/components/sidebar-nav";
 export default async function AppLayout({ children }: { children: ReactNode }) {
   await requireUser();
   const profile = await getProfile();
+  const settings = await getAppSettings();
+  const appName = settings.app_name;
   const items = navItemsForRole(profile?.role ?? "customer");
 
   return (
@@ -24,16 +26,16 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
       {/* Desktop sidebar */}
       <aside className="hidden w-60 shrink-0 flex-col gap-4 border-r border-sidebar-border bg-sidebar p-4 text-sidebar-foreground md:flex">
         <Link href="/dashboard" className="font-heading px-3 text-sm font-semibold">
-          {appConfig.name}
+          {appName}
         </Link>
         <SidebarNav items={items} />
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-14 items-center gap-3 border-b px-4">
-          <MobileNav items={items} appName={appConfig.name} />
+          <MobileNav items={items} appName={appName} />
           <span className="font-heading text-sm font-semibold md:hidden">
-            {appConfig.name}
+            {appName}
           </span>
 
           <div className="ml-auto flex items-center gap-3">

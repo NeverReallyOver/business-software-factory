@@ -38,6 +38,27 @@ export interface Database {
         };
         Relationships: [];
       };
+      app_settings: {
+        Row: {
+          id: number;
+          app_name: string;
+          support_email: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          id?: number;
+          app_name?: string;
+          support_email?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          id?: number;
+          app_name?: string;
+          support_email?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<never, never>;
     Functions: {
@@ -54,3 +75,4 @@ export interface Database {
 }
 
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+export type AppSettings = Database["public"]["Tables"]["app_settings"]["Row"];

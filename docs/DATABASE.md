@@ -51,3 +51,6 @@ live in the customer project.
   and update their own profile (not their role). Owners/admins manage other
   users' roles, but no one changes their own role via the privileged policy and
   only an owner may target or assign the `owner` role.
+- `app_settings` (`supabase/migrations/0002_app_settings.sql`) — single-row
+  (`id = 1`) workspace config: `app_name`, `support_email`. Any authenticated
+  user may read; only an owner may update (RLS).
