@@ -59,6 +59,27 @@ export interface Database {
         };
         Relationships: [];
       };
+      user_invites: {
+        Row: {
+          email: string;
+          role: UserRole;
+          invited_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          email: string;
+          role?: UserRole;
+          invited_by?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          email?: string;
+          role?: UserRole;
+          invited_by?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<never, never>;
     Functions: {
