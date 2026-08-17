@@ -13,13 +13,7 @@ import { toast } from "@/components/ui/toast";
 import { updateProfile } from "../actions";
 import { profileSchema, type ProfileInput } from "../schemas";
 
-export function ProfileForm({
-  email,
-  defaultName,
-}: {
-  email: string;
-  defaultName: string;
-}) {
+export function ProfileForm({ defaultName }: { defaultName: string }) {
   const router = useRouter();
   const [error, setError] = useState<string>();
   const {
@@ -45,10 +39,6 @@ export function ProfileForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
       <FormStatus error={error} />
-
-      <Field label="Email" htmlFor="email">
-        <Input id="email" type="email" value={email} disabled />
-      </Field>
 
       <Field label="Full name" htmlFor="fullName" error={errors.fullName?.message}>
         <Input

@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { requireUser, getProfile } from "@/features/auth/server";
+import { EmailForm } from "@/features/account/components/email-form";
 import { PasswordForm } from "@/features/account/components/password-form";
 import { ProfileForm } from "@/features/account/components/profile-form";
 
@@ -31,10 +32,19 @@ export default async function AccountPage() {
           <CardDescription>Update your name.</CardDescription>
         </CardHeader>
         <CardContent>
-          <ProfileForm
-            email={profile?.email ?? ""}
-            defaultName={profile?.full_name ?? ""}
-          />
+          <ProfileForm defaultName={profile?.full_name ?? ""} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Email</CardTitle>
+          <CardDescription>
+            Change your email. We&apos;ll send a confirmation link to the new address.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <EmailForm currentEmail={profile?.email ?? ""} />
         </CardContent>
       </Card>
 
