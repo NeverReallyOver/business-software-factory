@@ -54,3 +54,10 @@ live in the customer project.
 - `app_settings` (`supabase/migrations/0002_app_settings.sql`) — single-row
   (`id = 1`) workspace config: `app_name`, `support_email`. Any authenticated
   user may read; only an owner may update (RLS).
+- `user_invites` (`supabase/migrations/0004_user_invites.sql`) — server-only
+  pending role assignments for invited users. RLS on with no policies; consumed
+  by the signup trigger so signup metadata is never trusted for role.
+- `audit_logs` (`supabase/migrations/0005_audit_logs.sql`) — audit trail of
+  privileged actions. Owner/admin read only; inserts go through the
+  `log_event` SECURITY DEFINER function, which captures the actor from the
+  session.

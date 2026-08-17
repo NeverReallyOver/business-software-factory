@@ -8,6 +8,14 @@
 
 export type UserRole = "owner" | "admin" | "staff" | "employee" | "customer";
 
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
+
 export interface Database {
   public: {
     Tables: {
@@ -80,12 +88,54 @@ export interface Database {
         };
         Relationships: [];
       };
+      audit_logs: {
+        Row: {
+          id: string;
+          actor_id: string | null;
+          actor_email: string | null;
+          action: string;
+          target_type: string | null;
+          target_id: string | null;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          actor_id?: string | null;
+          actor_email?: string | null;
+          action: string;
+          target_type?: string | null;
+          target_id?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          actor_id?: string | null;
+          actor_email?: string | null;
+          action?: string;
+          target_type?: string | null;
+          target_id?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<never, never>;
     Functions: {
       current_user_role: {
         Args: Record<never, never>;
         Returns: UserRole;
+      };
+      log_event: {
+        Args: {
+          p_action: string;
+          p_target_type?: string | null;
+          p_target_id?: string | null;
+          p_metadata?: Json;
+        };
+        Returns: undefined;
       };
     };
     Enums: {
@@ -97,3 +147,4 @@ export interface Database {
 
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type AppSettings = Database["public"]["Tables"]["app_settings"]["Row"];
+export type AuditLog = Database["public"]["Tables"]["audit_logs"]["Row"];

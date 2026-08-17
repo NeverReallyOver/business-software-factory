@@ -1,4 +1,10 @@
-import { LayoutDashboard, Settings, Users, type LucideIcon } from "lucide-react";
+import {
+  LayoutDashboard,
+  ScrollText,
+  Settings,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { UserRole } from "@/types/database";
 
@@ -17,6 +23,12 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { title: "Users", href: "/users", icon: Users, roles: ["owner", "admin"] },
+  {
+    title: "Activity",
+    href: "/audit",
+    icon: ScrollText,
+    roles: ["owner", "admin"],
+  },
   { title: "Settings", href: "/settings", icon: Settings, roles: ["owner"] },
 ];
 

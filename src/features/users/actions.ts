@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { requireRole } from "@/features/auth/server";
+import { logEvent } from "@/features/audit/log";
 import { createAdminClient, isAdminConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { roleChangeError } from "./permissions";
@@ -60,6 +61,12 @@ export async function updateUserRole(
 
   if (updateError) return { error: "Could not update the role. Please try again." };
 
+  await logEvent("user.role_changed", {
+    targetType: "user",
+    targetId: parsed.data.userId,
+    metadata: { from: target.role, to: parsed.data.role },
+  });
+
   revalidatePath("/users");
   return {};
 }
@@ -101,6 +108,12 @@ export async function inviteUser(input: InviteInput): Promise<{ error?: string }
     await admin.from("user_invites").delete().eq("email", parsed.data.email);
     return { error: "Could not send the invite. The email may already be registered." };
   }
+
+  await logEvent("user.invited", {
+    targetType: "user",
+    targetId: parsed.data.email,
+    metadata: { role: parsed.data.role },
+  });
 
   revalidatePath("/users");
   return {};
