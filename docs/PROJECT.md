@@ -6,7 +6,7 @@ This is the **master starter** for the Business Software Factory — a reusable
 base for building professional software for small and medium businesses (gyms,
 restaurants, salons, clinics, shops, coaching centres, service businesses).
 
-See `CLAUDE.md` at the repository root for the full engineering rules.
+See `docs/ENGINEERING_RULES.md` for the full engineering rules.
 
 ## Goals
 

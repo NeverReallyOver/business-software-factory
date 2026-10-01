@@ -54,7 +54,7 @@ export default function Home() {
         <CardHeader>
           <CardTitle className="text-base">Getting started</CardTitle>
           <CardContent className="px-0 pt-2 text-sm text-muted-foreground">
-            Read <code className="font-mono">CLAUDE.md</code> for engineering
+            Read <code className="font-mono">docs/ENGINEERING_RULES.md</code> for engineering
             rules and <code className="font-mono">docs/</code> for architecture,
             database, security, and deployment notes.
           </CardContent>

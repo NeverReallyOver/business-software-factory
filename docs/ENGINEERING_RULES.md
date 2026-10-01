@@ -1,5 +1,3 @@
-# CLAUDE.md
-
 # Business Software Factory — Master Engineering Rules
 
 ## 1. PURPOSE
@@ -122,7 +120,7 @@ Do NOT unnecessarily read the entire repository.
 This project is designed to work efficiently with AI coding agents. Avoid
 unnecessary context consumption.
 
-**DO** read: CLAUDE.md, the current task, relevant architecture documentation,
+**DO** read: ENGINEERING_RULES.md, the current task, relevant architecture documentation,
 relevant feature files, relevant components, relevant database definitions.
 
 **DO NOT:** scan the entire repository unnecessarily, read unrelated features,
@@ -157,7 +155,7 @@ See `tasks/TEMPLATE.md`. Implement only that task.
 
 For every task:
 
-1. Read `CLAUDE.md`.
+1. Read `docs/ENGINEERING_RULES.md`.
 2. Read the current task.
 3. Read relevant documentation.
 4. Inspect existing code related to the task.
@@ -579,7 +577,7 @@ lines over 200 unnecessary lines.
 
 ## 46. AI CONTEXT RULE
 
-Do not repeat project information already available in `CLAUDE.md`, `docs/`, or
+Do not repeat project information already available in `docs/ENGINEERING_RULES.md`, `docs/`, or
 `tasks/`. Reference existing documentation instead. If a rule is missing, add
 only what is needed — do not create a large new policy document unnecessarily.
 

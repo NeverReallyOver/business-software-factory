@@ -49,7 +49,7 @@ unless it was actually run.
 READ → UNDERSTAND → INSPECT → PLAN → IMPLEMENT → VALIDATE → REVIEW → REPORT
 ```
 
-1. Read `CLAUDE.md` and the task.
+1. Read `docs/ENGINEERING_RULES.md` and the task.
 2. Read only the relevant docs and code.
 3. Reuse existing components/utilities; make the smallest correct change.
 4. Handle loading / empty / error / success states.
